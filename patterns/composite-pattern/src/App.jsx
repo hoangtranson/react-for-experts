@@ -35,7 +35,7 @@ function App() {
       <h2>Beverage</h2>
       <RadioGroup
         name="beverage"
-        options={["Coffee", "Tea", "Water"]}
+        options={["Orange Juice", "Coffee"]}
         onChange={onChange("beverage")}
       />
     </main>
