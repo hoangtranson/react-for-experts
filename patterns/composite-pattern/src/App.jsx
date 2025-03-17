@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { RadioGroup } from "./components/RadioGroup";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data, setData] = useState({
+    meal: "",
+    bread: "",
+    side: "",
+    beverage: "",
+  });
 
+  const onChange = (name) => (value) => setData({ ...data, [name]: value });
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main>
+      <h1>Breakfast order form</h1>
+      <h2>Meal</h2>
+      <RadioGroup
+        name="meal"
+        options={["Small: $5.99", "Medium: $7.99", "Large: $9.99"]}
+        onChange={onChange("meal")}
+      />
+      <h2>Bread</h2>
+      <RadioGroup
+        name="meal"
+        options={["Bagel", "Roll", "Croissant"]}
+        onChange={onChange("bread")}
+      />
+      <h2>Side</h2>
+      <RadioGroup
+        name="side"
+        options={["Avocado", "Bacon"]}
+        onChange={onChange("side")}
+      />
+      <h2>Beverage</h2>
+      <RadioGroup
+        name="beverage"
+        options={["Coffee", "Tea", "Water"]}
+        onChange={onChange("beverage")}
+      />
+    </main>
+  );
 }
 
-export default App
+export default App;
