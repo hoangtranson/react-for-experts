@@ -13,7 +13,7 @@ function App() {
   const onChange = (name) => (value) => setData({ ...data, [name]: value });
   return (
     <main>
-      <h1>Breakfast order form</h1>
+      <h1>Breakfast order form 1</h1>
       <h2>Meal</h2>
       <RadioGroup
         name="meal"

@@ -47,7 +47,7 @@ function AppV2() {
 
   return (
     <main>
-      <h1>Breakfast order form</h1>
+      <h1>Breakfast order form 2</h1>
       <h2>Meal</h2>
       <RadioGroupV2 name="meal" options={meals} onChange={onChange("meal")} />
       <h2>Bread</h2>
