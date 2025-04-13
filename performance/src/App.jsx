@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useRef, useEffect } from "react";
+import "./App.css";
+
+export function Rerenderable(props) {
+  const isFirst = useRef(true);
+
+  console.log('Rerenderable ==>', props.origin);
+
+  useEffect(() => {
+    isFirst.current = false;
+  }, []);
+
+  const style = { color: isFirst.current ? "red" : "blue" };
+  const text = isFirst.current ? "First render" : "Not first render";
+
+  return <p style={style}>{text}</p>;
+}
+
+function RerenderWithoutPropsChange() {
+  const [, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount((c) => c + 1)}>Click to re-render</button>
+      <Rerenderable origin={'RerenderWithoutPropsChange'} />
+    </div>
+  );
+}
+
+function NoRerenderWithPropsChange() {
+  const count = useRef(0);
+  return (
+    <div>
+      <button onClick={() => count.current++}>Click to re-render</button>
+      <Rerenderable count={count.current} origin={'NoRerenderWithPropsChange'}/>
+    </div>
+  );
+}
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main>
+        <h4>Re-renders without changing properties</h4>
+        <RerenderWithoutPropsChange />
+        <h4>No re-render with changing properties</h4>
+        <NoRerenderWithPropsChange />
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
